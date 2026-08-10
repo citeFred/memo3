@@ -3,13 +3,11 @@ package com.meta.memo.controller;
 import com.meta.memo.domain.Memo;
 import com.meta.memo.dto.MemoRequestDto;
 import com.meta.memo.dto.MemoResponseDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -33,5 +31,12 @@ public class MemoController {
         // Entity -> ResponseDto 변환
         MemoResponseDto memoResponseDto = new MemoResponseDto(memo);
         return memoResponseDto;
+    }
+
+    @GetMapping()
+    public List<MemoResponseDto> getMemos() {
+        // Map to List
+        List<MemoResponseDto> responseDtoList = memoList.values().stream().map(MemoResponseDto::new).toList();
+        return responseDtoList;
     }
 }
